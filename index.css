@@ -1,0 +1,243 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  min-height: 100%;
+  width: 100%;
+}
+
+/* Para navegadores Chrome, Safari, Edge */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.page {
+  background-color: hsl(185, 41%, 84%);
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+  width: clamp(19.6875rem, 75%, 53rem);
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: hsl(0, 100%, 100%);
+}
+.app-d-input {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 2rem;
+  padding: 1rem;
+}
+.app-d-icon-and-text-input {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.app-d-bill-total {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.app-d-tip-percent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.app-d-tip-percent-values {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.app-d-number-people-labels {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.app-d-number-people-labels--error {
+  justify-content: space-between;
+}
+.app-d-number-people {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.app__text-label {
+  font-family: "Space Mono", monospace;
+  font-size: 1rem;
+  color: hsl(186, 14%, 43%);
+  line-height: 1.5;
+  font-weight: 700;
+}
+.app__text-label--error {
+  color: hsl(7, 51%, 68%);
+}
+.app__icon {
+  position: absolute;
+  inset-block-start: 0.8rem;
+  inset-inline-start: 0.8rem;
+  max-width: 1rem;
+}
+.app__text-input {
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  text-align: right;
+  font-family: "Space Mono", monospace;
+  font-size: 1.5rem;
+  color: hsl(183, 100%, 15%);
+  line-height: 1.5;
+  background-color: hsl(189, 47%, 97%);
+  padding: 0.25rem 1rem 0.25rem 2rem;
+}
+.app__text-input:hover {
+  cursor: pointer;
+}
+.app__text-input:focus {
+  outline: solid 0.125rem hsl(172, 67%, 45%);
+}
+.app__text-input--error:focus {
+  outline-color: hsl(7, 51%, 68%);
+}
+.app__button-label {
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  text-align: center;
+  font-family: "Space Mono", monospace;
+  font-size: 1.5rem;
+  color: hsl(0, 100%, 100%);
+  line-height: 1.5;
+  background-color: hsl(183, 100%, 15%);
+  width: clamp(5rem, 50%, 7.25rem);
+}
+.app__button-label:hover {
+  cursor: pointer;
+  background-color: hsl(185, 41%, 84%);
+  color: hsl(183, 100%, 15%);
+}
+.app__button-label-v-custom {
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  text-align: center;
+  font-family: "Space Mono", monospace;
+  font-size: 1.5rem;
+  color: hsl(0, 100%, 100%);
+  line-height: 1.5;
+  background-color: hsl(183, 100%, 15%);
+  width: clamp(5rem, 50%, 7.25rem);
+  background-color: hsl(189, 47%, 97%);
+  color: hsl(186, 14%, 43%);
+}
+.app__button-label-v-custom:hover {
+  cursor: pointer;
+}
+.app__button-label-v-custom:focus {
+  outline: solid 0.125rem hsl(172, 67%, 45%);
+  color: hsl(183, 100%, 15%);
+  text-align: right;
+}
+.app__button-label-v-custom--active {
+  background-color: hsl(172, 67%, 45%);
+  color: hsl(183, 100%, 15%);
+}
+.app__percent {
+  display: none;
+}
+.app__percent:checked + .app__button-label {
+  cursor: pointer;
+  background-color: hsl(172, 67%, 45%);
+  color: hsl(183, 100%, 15%);
+}
+.app-d-output {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background-color: hsl(183, 100%, 15%);
+  padding: 2rem;
+  border-radius: 1rem;
+  justify-content: space-between;
+  gap: 3rem;
+}
+.app-d-output-top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.app-d-output-labels {
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.app-d-output-labels-text {
+  display: flex;
+  flex-direction: column;
+}
+.app__output-text-one {
+  font-family: "Space Mono", monospace;
+  font-size: 1.125rem;
+  color: hsl(0, 100%, 100%);
+  line-height: 1.5;
+}
+.app__output-text-two {
+  font-family: "Space Mono", monospace;
+  font-size: 1rem;
+  color: hsl(184, 14%, 56%);
+  line-height: 1.5;
+}
+.app__output-text-three {
+  font-family: "Space Mono", monospace;
+  font-size: 2rem;
+  color: hsl(172, 67%, 45%);
+  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: 0.125rem;
+}
+.app__reset-button {
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  text-align: center;
+  font-family: "Space Mono", monospace;
+  font-size: 1.375rem;
+  color: hsl(183, 100%, 15%);
+  line-height: 1.5;
+  background-color: hsl(172, 67%, 45%);
+  width: 100%;
+}
+.app__reset-button:hover {
+  cursor: pointer;
+  background-color: hsl(185, 41%, 84%);
+}
+
+@media only screen and (max-width: 53.125rem) {
+  .app {
+    flex-direction: column;
+  }
+  .app-d-input, .app-d-output {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

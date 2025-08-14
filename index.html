@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+  <title>Frontend Mentor | Tip calculator app</title>
+</head>
+<body class="page">
+
+  <main class="app">
+
+    <div class="app-d-input">
+
+      <div class="app-d-bill-total">
+
+        <label class="app__text-label" for="app__bill-input">Bill</label>
+
+        <div class="app-d-icon-and-text-input">
+
+          <img class="app__icon" src="images/icon-dollar.svg" alt="Icon Dollar">
+  
+          <input type="number" id="app__bill-input" class="app__text-input" maxlength="10" value="0" min="0">
+
+        </div>
+
+      </div>
+    
+      <div class="app-d-tip-percent">
+
+        <span class="app__text-label">Select Tip %</span>
+
+        <div class="app-d-tip-percent-values" id="app-d-tip-percent-values">
+
+          <input type="radio" name="percent-option" id="app__five-percent" class="app__percent" value="five">
+          
+          <label class="app__button-label" for="app__five-percent">5%</label>
+
+          <input type="radio" name="percent-option" id="app__ten-percent" class="app__percent" value="ten">
+          
+          <label class="app__button-label" for="app__ten-percent">10%</label>
+
+          <input type="radio" name="percent-option" id="app__fifteen-percent" class="app__percent" value="fifteen">
+          
+          <label class="app__button-label" for="app__fifteen-percent">15%</label>
+
+          <input type="radio" name="percent-option" id="app__twenty-five-percent" class="app__percent" value="twenty-five">
+          
+          <label class="app__button-label" for="app__twenty-five-percent">25%</label>
+
+          <input type="radio" name="percent-option" id="app__fifty-percent" class="app__percent" value="fifty">
+          
+          <label class="app__button-label" for="app__fifty-percent">50%</label>
+          
+          <input class="app__button-label-v-custom" id="app__custom-percent" type="number" placeholder="Custom" value="">
+
+        </div>
+        
+      </div>
+
+      <div class="app-d-number-people">
+
+        <div class="app-d-number-people-labels" id="app-d-number-people-labels">
+
+          <label for="app__number-people-input" class="app__text-label">Number of People</label>
+
+          <label for="app__number-people-input" class="app__text-label app__text-label--error" id="app__text-label--error"></label>
+
+        </div>
+
+        <div class="app-d-icon-and-text-input">
+  
+          <img src="images/icon-person.svg" alt="Icon Person" class="app__icon">
+
+          <input type="number" id="app__number-people-input" class="app__text-input" maxlength="10" value="1" min="1" max="100">
+
+        </div>
+
+      </div>
+      
+    </div>
+
+    <div class="app-d-output">
+
+      <div class="app-d-output-top">
+
+        <div class="app-d-output-labels">
+  
+          <div class="app-d-output-labels-text">
+  
+            <span class="app__output-text-one">Tip Amount</span>
+  
+            <span class="app__output-text-two">/ person</span>
+  
+          </div>
+  
+          <span class="app__output-text-three" id="tip-amount-person">$0.00</span>
+  
+        </div>
+      
+        <div class="app-d-output-labels">
+  
+          <div class="app-d-output-labels-text">
+  
+            <span class="app__output-text-one">Total</span>
+  
+            <span class="app__output-text-two">/ person</span>
+  
+          </div>
+  
+          <span class="app__output-text-three" id="total-person">$0.00</span>
+  
+        </div>
+
+      </div>
+    
+      <div class="app-d-reset-button">
+
+        <button class="app__reset-button" id="app__reset-button" type="reset">RESET</button>
+
+      </div>
+
+    </div>
+  </main>
+  
+</body>
+</html>

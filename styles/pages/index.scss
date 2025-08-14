@@ -1,0 +1,181 @@
+@use "../global/normalize" as normalize;
+@use "../global/theme" as theme;
+
+.page {
+  background-color: theme.$Grey-200;
+}
+
+.app {
+  display: flex;
+  flex-direction: row;
+  width: clamp(19.6875rem, 75%, 53rem);
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: theme.$White;
+
+  &-d-input {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  &-d-icon-and-text-input {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-d-bill-total {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &-d-tip-percent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &-values {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  &-d-number-people-labels {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; 
+    &--error {
+      justify-content: space-between;
+    }
+  }
+
+  &-d-number-people {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+
+  &__text-label {
+    @include theme.labels;
+    &--error {
+      color: hsl(7, 51%, 68%);
+    } 
+  }
+
+  &__icon {
+    position: absolute;
+    inset-block-start: 0.8rem;
+    inset-inline-start: 0.8rem;
+    max-width: 1rem;
+  }
+
+  &__text-input {
+    @include theme.text-inputs;
+    padding: 0.25rem 1rem 0.25rem 2rem;
+    &:hover {
+      cursor: pointer;
+    }
+    &:focus {
+      outline: solid 0.125rem theme.$Green-400;
+    }
+    &--error:focus {
+      outline-color: hsl(7, 51%, 68%);
+    }
+  }
+  &__button-label {
+    @include theme.radio-inputs;
+    width: clamp(5rem, 50%, 7.25rem);
+    &:hover {
+      cursor: pointer;
+      background-color: theme.$Grey-200;
+      color: theme.$Green-900;
+    }
+    &-v-custom {
+      @include theme.radio-inputs;
+      width: clamp(5rem, 50%, 7.25rem);
+      background-color: theme.$Grey-50;
+      color: theme.$Grey-500;
+      &:hover {
+      cursor: pointer;
+      }
+      &:focus {
+        outline: solid 0.125rem theme.$Green-400;
+        color: theme.$Green-900;
+        text-align: right;
+      }
+      &--active {
+        background-color: theme.$Green-400;
+        color: theme.$Green-900;
+      }
+    }
+  }
+  &__percent {
+    display: none;
+    &:checked + .app__button-label {
+      cursor: pointer;
+      background-color: theme.$Green-400;
+      color: theme.$Green-900;
+    }
+  }
+  &-d-output {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    background-color: theme.$Green-900;
+    padding: 2rem;
+    border-radius: 1rem;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+
+  &-d-output-top {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &-d-output-labels {
+    align-content: center;   
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &-text {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__output-text-one {
+    @include theme.output-legend;
+  }
+  &__output-text-two {
+    @include theme.per-person;
+  }
+  &__output-text-three {
+    @include theme.values;
+  }
+  &__reset-button {
+    @include theme.reset-button;
+    width: 100%;
+    &:hover {
+      cursor: pointer;
+      background-color: theme.$Grey-200;
+    }
+  }
+}
+
+@media only screen and (max-width: 53.125rem) {
+  .app {
+    flex-direction: column;
+    &-d-input, &-d-output {
+      width: 100%;
+    }
+  }
+}
