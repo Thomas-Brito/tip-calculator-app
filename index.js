@@ -1,57 +1,51 @@
 const
-  numberPeopleLabelContainer = document.getElementById(`app-d-number-people-labels`),
-  numberPeopleLabel = document.getElementById(`app__text-label--error`),
-  tipPerson = document.getElementById(`tip-amount-person`),
-  totalPerson = document.getElementById(`total-person`),
-  bill = document.getElementById(`app__bill-input`),
-  numberPeople = document.getElementById(`app__number-people-input`),
-  options = document.getElementById(`app-d-tip-percent-values`),
-  resetButton = document.getElementById(`app__reset-button`),
-  customPercent = document.getElementById(`app__custom-percent`),
+  id = (id) => document.getElementById(id),
+  bill = id(`app__bill-input`),
+  options = id(`app-d-tip-percent-values`),
+  numberPeople = id(`app__number-people-input`),
+  resetButton = id(`app__reset-button`),
   numberInputs = document.querySelectorAll(`input[type=number]`),
-  percentOptions = Array.from(document.getElementsByClassName(`app__percent`));
-
-let
-  percentCurrentOption,
-  billValue,
-  customPercentValue,
-  numberPeopleValue,
-  percent,
-  tipTotal,
-  tipPerPerson,
-  totalPerPerson;
+  tipPerson = id(`tip-amount-person`),
+  totalPerson = id(`total-person`),
+  customPercent = id(`app__custom-percent`),
+  numberPeopleLabelContainer = id(`app-d-number-people-labels`),
+  numberPeopleLabel = id(`app__text-label--error`),
+  percentOptions = Array.from(document.getElementsByClassName(`app__percent`)); 
 
 const tipCalculator = () => {
 
-  billValue = Number(bill.value);
-  customPercentValue = Number(customPercent.value);
-  numberPeopleValue = Number(numberPeople.value);
-  percentCurrentOption = percentOptions.filter(option => option.checked === true);
+  const
+    getValidPeopleCount = people => people >= 1 ? people : 1,
+    percentMap = {
+      'five': 5,
+      'ten': 10,
+      'fifteen': 15,
+      'twenty-five': 25,
+      'fifty': 50
+    }
 
-  switch (percentCurrentOption[0]?.value) {
-    case `five`: percent = Number(5);
-    break;
-    case `ten`: percent = Number(10);
-    break;
-    case `fifteen`: percent = Number(15);
-    break;
-    case `twenty-five`: percent = Number(25);
-    break;
-    case `fifty`: percent = Number(50);
-    break;
-    default: percent = customPercentValue;
-    break;
-  }
+  let
+    percentCurrentOption = percentOptions.find(option => option.checked),
+    customPercentValue = Number(customPercent.value),
+    percent = percentMap[percentCurrentOption?.value] ?? customPercentValue,
+    billValue = Number(bill.value),
+    tipTotal = (billValue * percent / Number(100)),
+    numberPeopleValue = Number(numberPeople.value),
+    tipPerPerson = tipTotal / getValidPeopleCount(numberPeopleValue),
+    totalPerPerson = (billValue + tipTotal) / getValidPeopleCount(numberPeopleValue);
 
-  tipTotal = (billValue * percent / Number(100));
-  tipPerPerson = tipTotal / (numberPeopleValue >= 1 ? numberPeopleValue : Number(1));
-  totalPerPerson = (billValue + tipTotal) / (numberPeopleValue >= 1 ? numberPeopleValue : Number(1));
-  
+  return {tipPerPerson, totalPerPerson}
+}
+
+const updateUI = (results) => {
+
+  let {tipPerPerson, totalPerPerson} = results;
+
   tipPerson.innerText = `$${tipPerPerson.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   totalPerson.innerText = `$${totalPerPerson.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-const adjustingChecked = () => {
+const updateCustomPercentUI = () => {
 
   if (document.activeElement === customPercent) {
     percentOptions.forEach(option => option.checked = false);
@@ -61,10 +55,10 @@ const adjustingChecked = () => {
     }
 }
 
-const validateNumberPeople = () => {
+const validateNumberPeople = (peopleCount) => {
 
   if (document.activeElement === numberPeople) {
-    if (numberPeopleValue <= 0) {
+    if (peopleCount <= 0) {
       numberPeopleLabelContainer.classList.add(`app-d-number-people-labels--error`);
       numberPeople.classList.add(`app__text-input--error`);
       numberPeopleLabel.innerText = `Enter a number greater than zero`;
@@ -76,12 +70,8 @@ const validateNumberPeople = () => {
   }
 }
 
-bill.addEventListener(`input`, () => {tipCalculator()});
-options.addEventListener(`input`, () => {tipCalculator(); adjustingChecked()});
-numberPeople.addEventListener(`input`, () => {tipCalculator(); validateNumberPeople()});
-
-resetButton.addEventListener(`click`, () => {
-  bill.value = 0;
+const resetValues = () => {
+  bill.value = ``;
   percentOptions.forEach(option => option.checked = false);
   numberPeople.value = Number(1);
   tipPerson.innerText = `$0.00`;
@@ -91,6 +81,10 @@ resetButton.addEventListener(`click`, () => {
   numberPeopleLabelContainer.classList.remove(`app-d-number-people-labels--error`);
   numberPeople.classList.remove(`app__text-input--error`);
   numberPeopleLabel.innerText = ``;
-});
+}
 
+bill.addEventListener(`input`, () => {updateUI(tipCalculator())});
+options.addEventListener(`input`, () => {updateUI(tipCalculator()); updateCustomPercentUI()});
+numberPeople.addEventListener(`input`, () => {updateUI(tipCalculator()); validateNumberPeople(Number(numberPeople.value))});
+resetButton.addEventListener(`click`, () => {resetValues()});
 numberInputs.forEach(option => option.addEventListener(`focus`, option.select));
